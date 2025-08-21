@@ -271,7 +271,8 @@ export default function AdminUsersPage() {
                       <div className="text-right">
                         <Badge className={getRoleBadgeColor(user.role)}>{user.role}</Badge>
                         <p className="text-xs text-muted-foreground mt-1">
-                          Créé le {user.createdAt.toLocaleDateString("fr-FR")}
+                          {/* Créé le {user.createdAt.toLocaleDateString("fr-FR")} */}
+                          Créé le {user.createdAt.toString().split("T")[0]}
                         </p>
                       </div>
 

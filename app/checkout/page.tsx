@@ -108,6 +108,9 @@ export default function CheckoutPage() {
         router.push(`/order-confirmation/${data.order.id}`)
       } else {
         alert(data.error || "Erreur lors de la création de la commande")
+        if (data.error === "Authentification requise") {
+          setShowAuthForm(true)
+        }
       }
     } catch (error) {
       console.error("Order error:", error)

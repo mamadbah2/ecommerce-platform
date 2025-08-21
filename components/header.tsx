@@ -25,6 +25,7 @@ export function Header() {
       const response = await authFetch('/api/auth/me')
       if (response.ok) {
         const userData = await response.json()
+        console.log("User data:", userData)
         setUser(userData)
       }
     } catch (error) {

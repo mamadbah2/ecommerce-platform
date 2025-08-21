@@ -197,7 +197,7 @@ export default function SellerProductsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product) => (
-              <Card key={product.id} className={`${!product.isActive ? "opacity-60" : ""}`}>
+              <Card key={product._id} className={`${!product.isActive ? "opacity-60" : ""}`}>
                 <CardContent className="p-0">
                   <div className="aspect-square relative overflow-hidden rounded-t-lg bg-muted">
                     <Image
@@ -233,13 +233,13 @@ export default function SellerProductsPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => toggleProductStatus(product.id, product.isActive)}
+                      onClick={() => toggleProductStatus(product._id, product.isActive)}
                       className="flex-1"
                     >
                       {product.isActive ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </Button>
 
-                    <Link href={`/seller/products/${product.id}/edit`}>
+                    <Link href={`/seller/products/${product._id}/edit`}>
                       <Button variant="outline" size="sm">
                         <Edit className="h-4 w-4" />
                       </Button>
@@ -248,7 +248,7 @@ export default function SellerProductsPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => deleteProduct(product.id)}
+                      onClick={() => deleteProduct(product._id)}
                       className="text-destructive hover:text-destructive"
                     >
                       <Trash2 className="h-4 w-4" />

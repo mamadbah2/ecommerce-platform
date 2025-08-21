@@ -41,19 +41,12 @@ export interface IOrder extends Document {
     productName: string
     quantity: number
     price: number
-    variant?: {
-      size?: string
-      color?: string
-    }
   }>
   totalAmount: number
   status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled'
-  shippingAddress: {
-    street: string
-    city: string
-    postalCode: string
-    country: string
-  }
+  shippingAddress: string
+  phone: string
+  notes?: string
   createdAt: Date
   updatedAt: Date
 }
@@ -175,22 +168,16 @@ const OrderSchema = new Schema({
     default: 'pending'
   },
   shippingAddress: {
-    street: {
-      type: String,
-      required: true
-    },
-    city: {
-      type: String,
-      required: true
-    },
-    postalCode: {
-      type: String,
-      required: true
-    },
-    country: {
-      type: String,
-      required: true
-    }
+    type: String,
+    required: true
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  notes: {
+    type: String,
+    default: ""
   }
 }, {
   timestamps: true
