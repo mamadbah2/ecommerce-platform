@@ -3,6 +3,58 @@ import { requireRole } from "@/lib/auth"
 import connectDB from "@/lib/mongodb"
 import { Product } from "@/lib/models"
 
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const token = request.headers.get("Authorization")?.replace("Bearer ", "")
+
+    if (!token) {
+      return NextResponse.json({ error: "Token d'authentification requis" }, { status: 401 })
+    }
+
+    const session = await requireRole(token, ["seller", "admin"])
+    const { id } = await params
+    
+    await connectDB()
+    
+    const product = await Product.findById(id).lean() as any
+
+    if (!product) {
+      return NextResponse.json({ error: "Produit non trouvé" }, { status: 404 })
+    }
+
+    // Check if seller owns this product (unless admin)
+    if (session.user.role !== "admin" && product.sellerId !== session.user.id) {
+      return NextResponse.json({ error: "Accès refusé" }, { status: 403 })
+    }
+
+    // Format response
+    const productResponse = {
+      _id: product._id.toString(),
+      id: product._id.toString(),
+      name: product.name,
+      description: product.description,
+      images: product.images,
+      category: product.category,
+      sellerId: product.sellerId,
+      priceTiers: product.priceTiers,
+      stock: product.stock,
+      isActive: product.isActive,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
+    }
+
+    return NextResponse.json({
+      product: productResponse,
+    })
+  } catch (error) {
+    console.error("Get product error:", error)
+    if (error instanceof Error && error.message === "Insufficient permissions") {
+      return NextResponse.json({ error: "Accès refusé" }, { status: 403 })
+    }
+    return NextResponse.json({ error: "Erreur interne du serveur" }, { status: 500 })
+  }
+}
+
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const token = request.headers.get("Authorization")?.replace("Bearer ", "")

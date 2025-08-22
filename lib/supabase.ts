@@ -10,8 +10,6 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 export async function uploadImage(file: File, path: string): Promise<string | null> {
   try {
 
-    console.log('Variabeles:', { supabaseUrl, supabaseAnonKey })
-
     // Validation du fichier
     if (!file.type.startsWith('image/')) {
       throw new Error('Le fichier doit être une image')
