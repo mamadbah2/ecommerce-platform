@@ -13,7 +13,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     if (!product || !product.isActive) {
       return NextResponse.json({ error: "Produit non trouvé" }, { status: 404 })
     }
-    console.log("Product found:", product)
+    
     // Include seller information
     // const seller = getUserById(product.sellerId)
     const seller = await User.findById(product.sellerId).select("firstName lastName")

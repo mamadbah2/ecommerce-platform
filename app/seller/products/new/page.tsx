@@ -10,6 +10,7 @@ import Link from "next/link"
 export default function NewProductPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [sellerId, setSellerId] = useState<string>("")
 
   useEffect(() => {
     checkAuth()
@@ -29,6 +30,8 @@ export default function NewProductPage() {
       router.push("/")
       return
     }
+
+    setSellerId(user.id || user._id || "")
   }
 
   const handleSubmit = async (productData: any) => {
@@ -79,7 +82,12 @@ export default function NewProductPage() {
           </div>
 
           {/* Form */}
-          <ProductForm onSubmit={handleSubmit} onCancel={handleCancel} loading={loading} />
+          <ProductForm 
+            onSubmit={handleSubmit} 
+            onCancel={handleCancel} 
+            loading={loading}
+            sellerId={sellerId}
+          />
         </div>
       </div>
     </div>

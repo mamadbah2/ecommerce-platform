@@ -10,15 +10,17 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Plus, Trash2 } from "lucide-react"
 import type { Product, PriceTier } from "@/lib/types"
+import { ImageUpload } from "./image-upload"
 
 interface ProductFormProps {
   product?: Product
   onSubmit: (productData: any) => void
   onCancel: () => void
   loading?: boolean
+  sellerId?: string
 }
 
-export function ProductForm({ product, onSubmit, onCancel, loading }: ProductFormProps) {
+export function ProductForm({ product, onSubmit, onCancel, loading, sellerId }: ProductFormProps) {
   const [formData, setFormData] = useState({
     name: product?.name || "",
     description: product?.description || "",
@@ -74,6 +76,11 @@ export function ProductForm({ product, onSubmit, onCancel, loading }: ProductFor
     // Validate form
     if (!formData.name || !formData.description || !formData.category || !formData.stock) {
       alert("Veuillez remplir tous les champs obligatoires")
+      return
+    }
+
+    if (formData.images.length === 0) {
+      alert("Veuillez ajouter au moins une image du produit")
       return
     }
 
@@ -143,6 +150,20 @@ export function ProductForm({ product, onSubmit, onCancel, loading }: ProductFor
               />
             </div>
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Images du produit</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ImageUpload
+            images={formData.images}
+            onImagesChange={(images) => handleInputChange("images", images)}
+            sellerId={sellerId || "default"}
+            maxImages={5}
+          />
         </CardContent>
       </Card>
 

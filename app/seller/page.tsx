@@ -103,26 +103,7 @@ export default function SellerDashboard() {
                 Bienvenue, {user.firstName} {user.lastName}
               </p>
             </div>
-            <div className="flex items-center gap-4">
-              <Link href="/">
-                <Button variant="secondary" size="sm">
-                  <Eye className="h-4 w-4 mr-2" />
-                  Voir le site
-                </Button>
-              </Link>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
-                onClick={() => {
-                  localStorage.removeItem("authToken")
-                  localStorage.removeItem("user")
-                  router.push("/")
-                }}
-              >
-                Déconnexion
-              </Button>
-            </div>
+            
           </div>
         </div>
       </header>

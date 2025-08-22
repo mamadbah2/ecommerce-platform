@@ -25,8 +25,7 @@ export function Header() {
       const response = await authFetch('/api/auth/me')
       if (response.ok) {
         const userData = await response.json()
-        console.log("User data:", userData)
-        setUser(userData)
+        setUser(userData.user)
       }
     } catch (error) {
       console.error("Auth check failed:", error)
@@ -37,7 +36,19 @@ export function Header() {
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/auth/logout", { method: "POST" })
+      const token = localStorage.getItem('authToken')
+      
+      await fetch("/api/auth/logout", { 
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { 'Authorization': `Bearer ${token}` })
+        },
+        body: JSON.stringify({ token })
+      })
+      
+      // Clear token from localStorage
+      localStorage.removeItem('authToken')
       setUser(null)
       router.push("/")
     } catch (error) {
