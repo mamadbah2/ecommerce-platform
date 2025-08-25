@@ -243,10 +243,10 @@ export default function AdminOrdersPage() {
                               Vendeur: {item.product?.seller?.firstName} {item.product?.seller?.lastName}
                             </p>
                             <p className="text-sm text-muted-foreground">
-                              Quantité: {item.quantity} × {item.unitPrice.toLocaleString()} GNF
+                              Quantité: {item.quantity} × {item.unitPrice} GNF
                             </p>
                           </div>
-                          <p className="font-semibold">{item.totalPrice.toLocaleString()} GNF</p>
+                          <p className="font-semibold">{item.totalPrice} GNF</p>
                         </div>
                       ))}
                     </div>

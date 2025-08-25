@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { ArrowLeft, Plus, Edit, Trash2, Search, Eye, EyeOff } from "lucide-react"
+import { ArrowLeft, Plus, Edit, Trash2, Search, Eye, EyeOff, Info } from "lucide-react"
 import Link from "next/link"
 import type { User } from "@/lib/types"
 
@@ -277,6 +277,12 @@ export default function AdminUsersPage() {
                       </div>
 
                       <div className="flex gap-2">
+                        <Link href={`/admin/users/${user.id}/details`}>
+                          <Button variant="outline" size="sm">
+                            <Info className="h-4 w-4" />
+                          </Button>
+                        </Link>
+
                         <Button variant="outline" size="sm" onClick={() => toggleUserStatus(user.id, user.isActive)}>
                           {user.isActive ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                         </Button>
