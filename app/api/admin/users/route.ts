@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { requireRole, createUser } from "@/lib/auth"
-import { mockUsers } from "@/lib/mock-data"
+import { requireRole } from "@/lib/auth"
+import connectDB from "@/lib/mongodb"
+import { User } from "@/lib/models"
+import bcrypt from "bcryptjs"
 
 export async function GET(request: NextRequest) {
   try {
@@ -10,17 +12,30 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Token d'authentification requis" }, { status: 401 })
     }
 
-    requireRole(token, ["admin"])
+    await requireRole(token, ["admin"])
+    await connectDB()
 
-    // Return all users without passwords
-    const users = mockUsers.map((user) => ({
-      ...user,
-      password: undefined,
+    // Get all users from database, excluding passwords
+    const users = await User.find({}, { password: 0 }).lean() as any[]
+
+    // Format users for response
+    const formattedUsers = users.map(user => ({
+      id: user._id.toString(),
+      _id: user._id.toString(),
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      phone: user.phone || "",
+      address: user.address || "",
+      isActive: user.isActive,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt
     }))
 
     return NextResponse.json({
-      users,
-      total: users.length,
+      users: formattedUsers,
+      total: formattedUsers.length,
     })
   } catch (error) {
     console.error("Get users error:", error)
@@ -39,7 +54,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Token d'authentification requis" }, { status: 401 })
     }
 
-    requireRole(token, ["admin"])
+    await requireRole(token, ["admin"])
+    await connectDB()
 
     const { email, password, firstName, lastName, role, phone, address } = await request.json()
 
@@ -52,26 +68,49 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const existingUser = mockUsers.find((user) => user.email === email)
+    const existingUser = await User.findOne({ email }).lean()
     if (existingUser) {
       return NextResponse.json({ error: "Un utilisateur avec cet email existe déjà" }, { status: 409 })
     }
 
+    // Hash password
+    const saltRounds = 10
+    const hashedPassword = await bcrypt.hash(password, saltRounds)
+
     // Create new user
-    const newUser = createUser({
+    const newUser = new User({
       email,
-      password,
+      password: hashedPassword,
       firstName,
       lastName,
-      role: role as "client" | "seller" | "admin",
-      phone,
-      address,
+      role,
+      phone: phone || "",
+      address: address || "",
       isActive: true,
+      createdAt: new Date(),
+      updatedAt: new Date()
     })
+
+    const savedUser = await newUser.save()
+
+    // Format response (exclude password)
+    const userResponse = {
+      id: savedUser._id.toString(),
+      _id: savedUser._id.toString(),
+      email: savedUser.email,
+      firstName: savedUser.firstName,
+      lastName: savedUser.lastName,
+      role: savedUser.role,
+      phone: savedUser.phone,
+      address: savedUser.address,
+      isActive: savedUser.isActive,
+      createdAt: savedUser.createdAt,
+      updatedAt: savedUser.updatedAt
+    }
 
     return NextResponse.json({
       message: "Utilisateur créé avec succès",
-      user: { ...newUser, password: undefined },
+      user: userResponse,
     })
   } catch (error) {
     console.error("Create user error:", error)

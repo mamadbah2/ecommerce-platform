@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { requireRole } from "@/lib/auth"
-import { mockUsers, mockProducts, mockOrders } from "@/lib/mock-data"
+import connectDB from "@/lib/mongodb"
+import { User, Product, Order } from "@/lib/models"
 
 export async function GET(request: NextRequest) {
   try {
@@ -10,23 +11,27 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Token d'authentification requis" }, { status: 401 })
     }
 
-    requireRole(token, ["admin"])
+    await requireRole(token, ["admin"])
+    await connectDB()
 
-    // Calculate platform statistics
-    const totalUsers = mockUsers.length
-    const activeUsers = mockUsers.filter((u) => u.isActive).length
-    const totalSellers = mockUsers.filter((u) => u.role === "seller").length
-    const totalClients = mockUsers.filter((u) => u.role === "client").length
+    // Calculate platform statistics from database
+    const users = await User.find({}).lean()
+    const totalUsers = users.length
+    const activeUsers = users.filter((u: any) => u.isActive).length
+    const totalSellers = users.filter((u: any) => u.role === "seller").length
+    const totalClients = users.filter((u: any) => u.role === "client").length
 
-    const totalProducts = mockProducts.length
-    const activeProducts = mockProducts.filter((p) => p.isActive).length
+    const products = await Product.find({}).lean()
+    const totalProducts = products.length
+    const activeProducts = products.filter((p: any) => p.isActive).length
 
-    const totalOrders = mockOrders.length
-    const totalRevenue = mockOrders.reduce((sum, order) => sum + order.totalAmount, 0)
+    const orders = await Order.find({}).lean()
+    const totalOrders = orders.length
+    const totalRevenue = orders.reduce((sum: number, order: any) => sum + order.totalAmount, 0)
 
     // Orders by status
-    const ordersByStatus = mockOrders.reduce(
-      (acc, order) => {
+    const ordersByStatus = orders.reduce(
+      (acc: Record<string, number>, order: any) => {
         acc[order.status] = (acc[order.status] || 0) + 1
         return acc
       },
@@ -34,8 +39,8 @@ export async function GET(request: NextRequest) {
     )
 
     // Users by role
-    const usersByRole = mockUsers.reduce(
-      (acc, user) => {
+    const usersByRole = users.reduce(
+      (acc: Record<string, number>, user: any) => {
         acc[user.role] = (acc[user.role] || 0) + 1
         return acc
       },
@@ -46,9 +51,9 @@ export async function GET(request: NextRequest) {
     const sevenDaysAgo = new Date()
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
 
-    const recentUsers = mockUsers.filter((u) => u.createdAt >= sevenDaysAgo).length
-    const recentProducts = mockProducts.filter((p) => p.createdAt >= sevenDaysAgo).length
-    const recentOrders = mockOrders.filter((o) => o.createdAt >= sevenDaysAgo).length
+    const recentUsers = users.filter((u: any) => new Date(u.createdAt) >= sevenDaysAgo).length
+    const recentProducts = products.filter((p: any) => new Date(p.createdAt) >= sevenDaysAgo).length
+    const recentOrders = orders.filter((o: any) => new Date(o.createdAt) >= sevenDaysAgo).length
 
     return NextResponse.json({
       stats: {

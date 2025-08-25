@@ -118,7 +118,7 @@ export default function AdminDashboard() {
                 Bienvenue, {user.firstName} {user.lastName}
               </p>
             </div>
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               <Link href="/">
                 <Button variant="secondary" size="sm">
                   <Eye className="h-4 w-4 mr-2" />
@@ -137,7 +137,7 @@ export default function AdminDashboard() {
               >
                 Déconnexion
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </header>
