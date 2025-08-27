@@ -61,7 +61,7 @@ export default function LoginPage() {
             </div>
           </div>
           <CardTitle className="text-2xl font-bold">Connexion</CardTitle>
-          <CardDescription>Connectez-vous à votre compte GuinéeShop</CardDescription>
+          <CardDescription>Connectez-vous à votre compte Mabex</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

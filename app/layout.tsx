@@ -8,7 +8,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "GuinéeShop - E-commerce",
+  title: "Mabex - E-commerce",
   description: "Plateforme e-commerce avec prix dégressifs",
   generator: "v0.app",
 }

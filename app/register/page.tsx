@@ -82,7 +82,7 @@ export default function RegisterPage() {
             </div>
           </div>
           <CardTitle className="text-2xl font-bold">Inscription</CardTitle>
-          <CardDescription>Créez votre compte GuinéeShop</CardDescription>
+          <CardDescription>Créez votre compte Mabex</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

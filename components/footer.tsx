@@ -12,7 +12,7 @@ export function Footer() {
               <div className="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center">
                 <Package className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">GuinéeShop</span>
+              <span className="text-xl font-bold text-gray-900">Mabex</span>
             </div>
             <p className="text-gray-600 mb-4">
               Votre plateforme e-commerce de confiance avec des prix dégressifs selon la quantité. Découvrez nos
@@ -60,7 +60,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-200 pt-8 mt-8">
-          <p className="text-center text-gray-500 text-sm">© 2024 GuinéeShop. Tous droits réservés.</p>
+          <p className="text-center text-gray-500 text-sm">© 2024 Mabex. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

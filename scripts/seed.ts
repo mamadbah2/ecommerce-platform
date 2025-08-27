@@ -18,7 +18,7 @@ async function seedDatabase() {
         email: 'admin@guineeshop.com',
         password: await hashPassword('admin123'),
         firstName: 'Admin',
-        lastName: 'GuinéeShop',
+        lastName: 'Mabex',
         role: 'admin'
       },
       {
