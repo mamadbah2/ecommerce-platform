@@ -44,6 +44,8 @@ export async function login(email: string, password: string): Promise<AuthSessio
       firstName: user.firstName,
       lastName: user.lastName,
       role: user.role,
+      phone: user.phone || '',
+      address: user.address || '',
       isActive: user.isActive,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt
@@ -85,6 +87,8 @@ export async function getSession(token: string): Promise<AuthSession | null> {
       firstName: user.firstName,
       lastName: user.lastName,
       role: user.role,
+      phone: user.phone || '',
+      address: user.address || '',
       isActive: user.isActive,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt
@@ -140,6 +144,8 @@ export async function createUser(userData: Omit<UserType, "id" | "createdAt" | "
       firstName: savedUser.firstName,
       lastName: savedUser.lastName,
       role: savedUser.role,
+      phone: savedUser.phone || '',
+      address: savedUser.address || '',
       isActive: savedUser.isActive,
       createdAt: savedUser.createdAt,
       updatedAt: savedUser.updatedAt
