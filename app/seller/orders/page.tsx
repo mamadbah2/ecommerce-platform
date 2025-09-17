@@ -219,7 +219,7 @@ export default function SellerOrdersPage() {
                     </div>
                     <div className="text-right">
                       <OrderStatusBadge status={order.status} />
-                      <p className="text-lg font-bold text-primary mt-2">{order.totalAmount.toLocaleString()} GNF</p>
+                      <p className="text-lg font-bold text-primary mt-2">{order.totalAmount.toLocaleString()} $</p>
                     </div>
                   </div>
                 </CardHeader>
@@ -232,10 +232,10 @@ export default function SellerOrdersPage() {
                           <div>
                             <p className="font-medium">{item.product?.name || "Produit inconnu"}</p>
                             <p className="text-sm text-muted-foreground">
-                              Quantité: {item.quantity} × {item.unitPrice.toLocaleString()} GNF
+                              Quantité: {item.quantity} × {item.unitPrice.toLocaleString()} $
                             </p>
                           </div>
-                          <p className="font-semibold">{item.totalPrice.toLocaleString()} GNF</p>
+                          <p className="font-semibold">{item.totalPrice.toLocaleString()} $</p>
                         </div>
                       ))}
                     </div>

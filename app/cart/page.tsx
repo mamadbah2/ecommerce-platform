@@ -62,7 +62,7 @@ export default function CartPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span>Articles ({state.itemCount})</span>
-                      <span>{state.total.toLocaleString()} GNF</span>
+                      <span>{state.total.toLocaleString()} $</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Livraison</span>
@@ -71,7 +71,7 @@ export default function CartPage() {
                     <hr />
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total</span>
-                      <span className="text-primary">{state.total.toLocaleString()} GNF</span>
+                      <span className="text-primary">{state.total.toLocaleString()} $</span>
                     </div>
                   </div>
 

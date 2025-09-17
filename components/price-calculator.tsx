@@ -69,7 +69,7 @@ export function PriceCalculator({ product, onQuantityChange }: PriceCalculatorPr
                 {quantity >= 10 && <Badge className="bg-primary">Prix de gros</Badge>}
               </div>
               <p className="text-sm text-muted-foreground">
-                Prix unitaire pour cette quantité: {unitPrice.toLocaleString()} GNF
+                Prix unitaire pour cette quantité: {unitPrice.toLocaleString()} $
               </p>
             </div>
           )}
@@ -77,11 +77,11 @@ export function PriceCalculator({ product, onQuantityChange }: PriceCalculatorPr
           <div className="border-t pt-4">
             <div className="flex justify-between items-center mb-2">
               <span className="text-base">Prix unitaire:</span>
-              <span className="text-lg font-semibold text-primary">{unitPrice.toLocaleString()} GNF</span>
+              <span className="text-lg font-semibold text-primary">{unitPrice.toLocaleString()} $</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-lg font-semibold">Total:</span>
-              <span className="text-2xl font-bold text-primary">{totalPrice.toLocaleString()} GNF</span>
+              <span className="text-2xl font-bold text-primary">{totalPrice.toLocaleString()} $</span>
             </div>
           </div>
 
@@ -94,7 +94,7 @@ export function PriceCalculator({ product, onQuantityChange }: PriceCalculatorPr
                     {tier.minQuantity}
                     {tier.maxQuantity ? `-${tier.maxQuantity}` : "+"} pièces:
                   </span>
-                  <span className="font-medium">{tier.price.toLocaleString()} GNF</span>
+                  <span className="font-medium">{tier.price.toLocaleString()} $</span>
                 </div>
               ))}
             </div>

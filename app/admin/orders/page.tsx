@@ -227,7 +227,7 @@ export default function AdminOrdersPage() {
                     </div>
                     <div className="text-right">
                       <OrderStatusBadge status={order.status} />
-                      <p className="text-lg font-bold text-primary mt-2">{order.totalAmount.toLocaleString()} GNF</p>
+                      <p className="text-lg font-bold text-primary mt-2">{order.totalAmount.toLocaleString()} $</p>
                     </div>
                   </div>
                 </CardHeader>
@@ -243,10 +243,10 @@ export default function AdminOrdersPage() {
                               Vendeur: {item.product?.seller?.firstName} {item.product?.seller?.lastName}
                             </p>
                             <p className="text-sm text-muted-foreground">
-                              Quantité: {item.quantity} × {item.unitPrice} GNF
+                              Quantité: {item.quantity} × {item.unitPrice} $
                             </p>
                           </div>
-                          <p className="font-semibold">{item.totalPrice} GNF</p>
+                          <p className="font-semibold">{item.totalPrice} $</p>
                         </div>
                       ))}
                     </div>

@@ -205,7 +205,7 @@ export function ProductForm({ product, onSubmit, onCancel, loading, sellerId }: 
                 </div>
 
                 <div>
-                  <Label>Prix (GNF)</Label>
+                  <Label>Prix ($)</Label>
                   <Input
                     type="number"
                     min="0"

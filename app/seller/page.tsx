@@ -143,7 +143,7 @@ export default function SellerDashboard() {
                 <div>
                   <p className="text-sm text-muted-foreground">Chiffre d'affaires</p>
                   <p className="text-2xl font-bold text-primary">{stats.totalRevenue.toLocaleString()}</p>
-                  <p className="text-xs text-muted-foreground">GNF</p>
+                  <p className="text-xs text-muted-foreground">$</p>
                 </div>
                 <TrendingUp className="h-8 w-8 text-primary" />
               </div>

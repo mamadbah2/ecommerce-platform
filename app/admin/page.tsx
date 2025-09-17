@@ -190,7 +190,7 @@ export default function AdminDashboard() {
                 <div>
                   <p className="text-sm text-muted-foreground">Chiffre d'affaires</p>
                   <p className="text-2xl font-bold text-primary">{stats.revenue.total.toLocaleString()}</p>
-                  <p className="text-xs text-muted-foreground">GNF total</p>
+                  <p className="text-xs text-muted-foreground">$ total</p>
                 </div>
                 <TrendingUp className="h-8 w-8 text-primary" />
               </div>

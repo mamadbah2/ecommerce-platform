@@ -457,7 +457,7 @@ export default function UserDetailsPage() {
                                     {order.status}
                                   </Badge>
                                   <p className="text-sm font-medium mt-1">
-                                    {order.totalAmount.toLocaleString()} GNF
+                                    {order.totalAmount.toLocaleString()} $
                                   </p>
                                 </div>
                               </div>
@@ -466,7 +466,7 @@ export default function UserDetailsPage() {
                                 {order.items.map((item, index) => (
                                   <div key={index} className="flex justify-between text-sm">
                                     <span>{item.productName} x{item.quantity}</span>
-                                    <span>{(item.price * item.quantity).toLocaleString()} GNF</span>
+                                    <span>{(item.price * item.quantity).toLocaleString()} $</span>
                                   </div>
                                 ))}
                               </div>

@@ -191,10 +191,10 @@ export default function OrdersPage() {
                           <div>
                             <p className="font-medium">{item.product?.name || "Produit inconnu"}</p>
                             <p className="text-sm text-muted-foreground">
-                              Quantité: {item.quantity} × {item.unitPrice.toLocaleString()} GNF
+                              Quantité: {item.quantity} × {item.unitPrice.toLocaleString()} $
                             </p>
                           </div>
-                          <p className="font-semibold">{item.totalPrice.toLocaleString()} GNF</p>
+                          <p className="font-semibold">{item.totalPrice.toLocaleString()} $</p>
                         </div>
                       ))}
                     </div>
@@ -203,7 +203,7 @@ export default function OrdersPage() {
                     <div className="flex items-center justify-between pt-4 border-t">
                       <div>
                         <p className="text-sm text-muted-foreground">Total</p>
-                        <p className="text-xl font-bold text-primary">{order.totalAmount.toLocaleString()} GNF</p>
+                        <p className="text-xl font-bold text-primary">{order.totalAmount.toLocaleString()} $</p>
                       </div>
 
                       <Link href={`/orders/${order.id}`}>

@@ -285,10 +285,10 @@ export default function CheckoutPage() {
                         <div className="flex-1">
                           <p className="font-medium">{item.product?.name}</p>
                           <p className="text-sm text-muted-foreground">
-                            {item.quantity} x {item.selectedPrice.toLocaleString()} GNF
+                            {item.quantity} x {item.selectedPrice.toLocaleString()} $
                           </p>
                         </div>
-                        <p className="font-semibold">{(item.quantity * item.selectedPrice).toLocaleString()} GNF</p>
+                        <p className="font-semibold">{(item.quantity * item.selectedPrice).toLocaleString()} $</p>
                       </div>
                     ))}
                   </div>
@@ -298,7 +298,7 @@ export default function CheckoutPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span>Sous-total</span>
-                      <span>{state.total.toLocaleString()} GNF</span>
+                      <span>{state.total.toLocaleString()} $</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Livraison</span>
@@ -307,13 +307,13 @@ export default function CheckoutPage() {
                     <hr />
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total</span>
-                      <span className="text-primary">{state.total.toLocaleString()} GNF</span>
+                      <span className="text-primary">{state.total.toLocaleString()} $</span>
                     </div>
                   </div>
 
                   <div className="text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg">
                     <p className="font-semibold mb-1">Paiement à la livraison</p>
-                    <p>Vous paierez {state.total.toLocaleString()} GNF lors de la réception de votre commande.</p>
+                    <p>Vous paierez {state.total.toLocaleString()} $ lors de la réception de votre commande.</p>
                   </div>
                 </CardContent>
               </Card>

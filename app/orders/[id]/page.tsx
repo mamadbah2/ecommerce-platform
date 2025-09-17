@@ -169,7 +169,7 @@ export default function OrderDetailsPage() {
                   <div className="bg-muted/50 p-4 rounded-lg">
                     <p className="font-semibold mb-2">Paiement à la livraison</p>
                     <p className="text-sm text-muted-foreground mb-2">
-                      Vous paierez {order.totalAmount.toLocaleString()} GNF lors de la réception de votre commande.
+                      Vous paierez {order.totalAmount.toLocaleString()} $ lors de la réception de votre commande.
                     </p>
                     <p className="text-xs text-muted-foreground">
                       Aucun paiement en ligne n'est requis pour cette commande.
@@ -196,11 +196,11 @@ export default function OrderDetailsPage() {
                         {item.product?.seller?.lastName}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        {item.quantity} × {item.unitPrice.toLocaleString()} GNF
+                        {item.quantity} × {item.unitPrice.toLocaleString()} $
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-lg">{item.totalPrice.toLocaleString()} GNF</p>
+                      <p className="font-semibold text-lg">{item.totalPrice.toLocaleString()} $</p>
                     </div>
                   </div>
                 ))}
@@ -208,7 +208,7 @@ export default function OrderDetailsPage() {
                 <div className="border-t pt-4">
                   <div className="flex justify-between items-center text-xl font-bold">
                     <span>Total:</span>
-                    <span className="text-primary">{order.totalAmount.toLocaleString()} GNF</span>
+                    <span className="text-primary">{order.totalAmount.toLocaleString()} $</span>
                   </div>
                 </div>
               </div>

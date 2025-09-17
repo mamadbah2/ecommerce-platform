@@ -283,7 +283,7 @@ export default function AdminProductsPage() {
                     <div>
                       <p className="text-sm text-muted-foreground">À partir de</p>
                       <p className="text-lg font-bold text-primary">
-                        {Math.min(...product.priceTiers.map((t: any) => t.price)).toLocaleString()} GNF
+                        {Math.min(...product.priceTiers.map((t: any) => t.price)).toLocaleString()} $
                       </p>
                     </div>
                     <Badge variant="outline">{product.stock} en stock</Badge>

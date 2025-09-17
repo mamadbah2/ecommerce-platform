@@ -152,18 +152,18 @@ export default function ProductPage() {
               </Card>
             )}
 
-            <PriceCalculator product={product} onQuantityChange={handleQuantityChange} />
+            {/* <PriceCalculator product={product} onQuantityChange={handleQuantityChange} /> */}
 
-            <Button size="lg" className="w-full" onClick={handleAddToCart}>
+            {/* <Button size="lg" className="w-full" onClick={handleAddToCart}>
               <ShoppingCart className="h-5 w-5 mr-2" />
-              Ajouter au panier - {(selectedPrice * selectedQuantity).toLocaleString()} GNF
-            </Button>
+              Ajouter au panier - {(selectedPrice * selectedQuantity).toLocaleString()} $
+            </Button> */}
 
             <Card className="border-muted">
               <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Informations de paiement</h3>
+                <h3 className="font-semibold mb-2">Informations</h3>
                 <p className="text-sm text-muted-foreground">
-                  Paiement à la livraison uniquement. Aucun paiement en ligne requis.
+                  Ce site est de type vitrine. Aucun paiement en ligne requis.
                 </p>
               </CardContent>
             </Card>
