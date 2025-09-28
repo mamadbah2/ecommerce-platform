@@ -152,7 +152,7 @@ export default function ProductPage() {
               </Card>
             )}
 
-            {/* <PriceCalculator product={product} onQuantityChange={handleQuantityChange} /> */}
+            <PriceCalculator product={product} onQuantityChange={handleQuantityChange} />
 
             {/* <Button size="lg" className="w-full" onClick={handleAddToCart}>
               <ShoppingCart className="h-5 w-5 mr-2" />

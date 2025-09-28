@@ -33,10 +33,13 @@ export function ProductCard({ product }: ProductCardProps) {
             <div className="flex items-center justify-between">
               <div className="text-right">
                 {minPrice === maxPrice ? (
-                  <p className="text-xl font-bold text-primary">{minPrice.toLocaleString()} $</p>
+                  <div>
+                    <p className="text-sm text-muted-foreground">{product.priceTiers[0].minQuantity} pieces à </p>
+                    <p className="text-xl font-bold text-primary"> {minPrice.toLocaleString()} $</p>
+                  </div>
                 ) : (
                   <div>
-                    <p className="text-sm text-muted-foreground">À partir de</p>
+                    <p className="text-sm text-muted-foreground">{product.priceTiers[0].minQuantity} pieces à </p>
                     <p className="text-xl font-bold text-primary">{minPrice.toLocaleString()} $</p>
                   </div>
                 )}

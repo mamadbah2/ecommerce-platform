@@ -8,9 +8,23 @@ import { Badge } from "@/components/ui/badge"
 import type { Product } from "@/lib/types"
 import { calculateProductPrice } from "@/lib/mock-data"
 
+// Taux de change USD vers GNF (Franc Guinéen)
+const USD_TO_GNF_RATE = 8600
+
 interface PriceCalculatorProps {
   product: Product
   onQuantityChange: (quantity: number, price: number) => void
+}
+
+// Fonction pour convertir USD vers GNF
+const convertToGNF = (usdPrice: number): number => {
+  return usdPrice * USD_TO_GNF_RATE
+}
+
+// Fonction pour formater le prix avec les deux devises
+const formatDualPrice = (usdPrice: number): string => {
+  const gnfPrice = convertToGNF(usdPrice)
+  return `${usdPrice.toLocaleString()} $ / ${gnfPrice.toLocaleString()} GNF`
 }
 
 export function PriceCalculator({ product, onQuantityChange }: PriceCalculatorProps) {
@@ -69,7 +83,7 @@ export function PriceCalculator({ product, onQuantityChange }: PriceCalculatorPr
                 {quantity >= 10 && <Badge className="bg-primary">Prix de gros</Badge>}
               </div>
               <p className="text-sm text-muted-foreground">
-                Prix unitaire pour cette quantité: {unitPrice.toLocaleString()} $
+                Prix unitaire pour cette quantité: {formatDualPrice(unitPrice)}
               </p>
             </div>
           )}
@@ -77,11 +91,17 @@ export function PriceCalculator({ product, onQuantityChange }: PriceCalculatorPr
           <div className="border-t pt-4">
             <div className="flex justify-between items-center mb-2">
               <span className="text-base">Prix unitaire:</span>
-              <span className="text-lg font-semibold text-primary">{unitPrice.toLocaleString()} $</span>
+              <div className="text-right">
+                <div className="text-lg font-semibold text-primary">{unitPrice.toLocaleString()} $</div>
+                <div className="text-sm text-muted-foreground">{convertToGNF(unitPrice).toLocaleString()} GNF</div>
+              </div>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-lg font-semibold">Total:</span>
-              <span className="text-2xl font-bold text-primary">{totalPrice.toLocaleString()} $</span>
+              <div className="text-right">
+                <div className="text-2xl font-bold text-primary">{totalPrice.toLocaleString()} $</div>
+                <div className="text-lg font-semibold text-muted-foreground">{convertToGNF(totalPrice).toLocaleString()} GNF</div>
+              </div>
             </div>
           </div>
 
@@ -94,7 +114,10 @@ export function PriceCalculator({ product, onQuantityChange }: PriceCalculatorPr
                     {tier.minQuantity}
                     {tier.maxQuantity ? `-${tier.maxQuantity}` : "+"} pièces:
                   </span>
-                  <span className="font-medium">{tier.price.toLocaleString()} $</span>
+                  <div className="text-right">
+                    <div className="font-medium">{tier.price.toLocaleString()} $</div>
+                    <div className="text-xs text-muted-foreground">{convertToGNF(tier.price).toLocaleString()} GNF</div>
+                  </div>
                 </div>
               ))}
             </div>
